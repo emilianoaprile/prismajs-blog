@@ -1,4 +1,4 @@
-const {createPost, readPosts, readPostBySlug, updatePost, deletePost} = require('./utils/crud-post.js');
+const {createPost, readPosts, readPostBySlug, updatePost, deletePost, publishedPosts} = require('./utils/crud-post.js');
 const {createTags, readTags} = require('./utils/crud-tag.js');
 const {createCategories, readCategories} = require('./utils/crud-category.js');
 
@@ -14,17 +14,21 @@ const {createCategories, readCategories} = require('./utils/crud-category.js');
 
 // creazione di un post
 const postData = {
-    title: 'Titolo post 2',
-    slug: 'titolo-post-prova-2',
+    title: 'Titolo post non pubblicato',
+    slug: 'titolo-post-prova-post-non-pubblicato',
     image: 'https://picsum.photos/200/300',
-    content: 'Contenuto post 2',
-    published: true,
-    categoryId: 1,
+    content: 'Contenuto post non pubblicato',
+    published: false,
+    categoryId: 2,
     tags: {
-        connect: [{id: 1}, {id: 2}]
+        connect: [{id: 10}]
     }
 }
 
-createPost(postData, (post) => {
-    console.log(`Post ${post} creato con successo`);
+// createPost(postData, (post) => {
+//     console.log(`Post ${post} creato con successo`);
+// })
+
+publishedPosts((posts) => {
+    console.log(posts);
 })
