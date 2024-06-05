@@ -5,4 +5,4 @@
 
 */
 -- AlterTable
-ALTER TABLE `Post` ADD COLUMN `title` VARCHAR(191) NOT NULL;
+ALTER TABLE `Post` ADD COLUMN `title` VARCHAR(191) NOT NULL AFTER `id`;
