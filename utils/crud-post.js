@@ -8,11 +8,8 @@ const createPost = (data, callback) => {
     .catch(error => console.log(error))
 }
 
-const readPosts = (slug, callback) => {
+const readPosts = (callback) => {
     prisma.post.findMany({
-        where: {
-            slug
-        },
         include: {
             tags: {
                 select: {
@@ -30,6 +27,28 @@ const readPosts = (slug, callback) => {
     .catch(error => console.log(error))
 }
 
+const readPostBySlug = (slug, callback) => {
+    prisma.post.findUnique({
+        where: {
+            slug
+        },
+        include: {
+            tags: {
+                select: {
+                    name: true
+                }
+            },
+            category: {
+                select: {
+                    name: true
+                }
+            }
+        }
+    })
+    .then(post => callback(post))
+    .catch(error => console.log(error))
+}
+
 const updatePost = (slug, data, callback) => {
     prisma.post.update({
         where: {
@@ -39,4 +58,22 @@ const updatePost = (slug, data, callback) => {
     })
     .then(post => callback(post))
     .catch(error => console.log(error))
+}
+
+const deletePost = (slug, callback) => {
+    prisma.post.delete({
+        where: {
+            slug
+        }
+    })
+    .then(post => callback(post))
+    .catch(error => console.log(error))
+}
+
+module.exports = {
+    createPost,
+    readPosts,
+    readPostBySlug,
+    updatePost,
+    deletePost
 }
