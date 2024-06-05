@@ -1,4 +1,4 @@
-const {createPost, readPosts, readPostBySlug, updatePost, deletePost, publishedPosts} = require('./utils/crud-post.js');
+const {createPost, readPosts, readPostBySlug, updatePost, deletePost, publishedPosts, searchString} = require('./utils/crud-post.js');
 const {createTags, readTags} = require('./utils/crud-tag.js');
 const {createCategories, readCategories} = require('./utils/crud-category.js');
 
@@ -29,6 +29,12 @@ const postData = {
 //     console.log(`Post ${post} creato con successo`);
 // })
 
-publishedPosts((posts) => {
-    console.log(posts);
-})
+// publishedPosts((posts) => {
+//     console.log(posts);
+// })
+
+// searchString('non pubblicato', (posts) => {
+//     console.log(posts);
+// })
+
+

@@ -92,11 +92,36 @@ const publishedPosts = (callback) => {
    .catch(error => console.log(error))
 }
 
+const searchString = (string, callback) => {
+    prisma.post.findMany({
+        where: {
+            content: {
+                contains: string
+            }
+        },
+        include: {
+            tags: {
+                select: {
+                    name: true
+                }
+            },
+            category: {
+                select: {
+                    name: true
+                }
+            }
+        }
+    })
+    .then(posts => callback(posts))
+    .catch(error => console.log(error))
+}
+
 module.exports = {
     createPost,
     readPosts,
     readPostBySlug,
     updatePost,
     deletePost,
-    publishedPosts
+    publishedPosts,
+    searchString
 }
